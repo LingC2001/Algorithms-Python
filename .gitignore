@@ -1,2 +1,4 @@
 Algorithms/__pycache__/
 Algorithms/.pytest_cache/
+Algorithms/tests/__pycache__/
+Algorithms/tests/.pytest_cache/
