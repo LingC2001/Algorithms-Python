@@ -23,7 +23,7 @@ def DNF_partition(arr, lo, hi, pivot):
     # lo will end up at the first pivot
     # mid will end up 1 index after pivots
 
-def quick_select(arr, lo, hi, k):
+def quick_select_random(arr, lo, hi, k):
     """
     selects the k-th smallest element, not-stable 
     (will need naive-partitioning to be stable)
@@ -38,9 +38,9 @@ def quick_select(arr, lo, hi, k):
         mid_left, mid_right = DNF_partition(arr, lo, hi, pivot)
 
         if k < mid_left: # idx we want is to the left of pivots
-            return quick_select(arr, lo, mid_left, k)
+            return quick_select_random(arr, lo, mid_left, k)
         elif k >= mid_right: # idx we want is to the right of the pivots
-            return quick_select(arr, mid_right, hi, k)
+            return quick_select_random(arr, mid_right, hi, k)
         else: # idx we want is within pivots
             # k is wihin the pivots, and all the pivots are in the correct positions,
             # therefore arr[k] = arr[mid_left] to arr[mid_right-1], can return any of these
