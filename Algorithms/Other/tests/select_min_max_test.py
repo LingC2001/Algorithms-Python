@@ -1,6 +1,7 @@
 import pytest
 import sys
-sys.path.append("./")
+import os
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from select_min_max import select_min_max
 
 def test_empty():

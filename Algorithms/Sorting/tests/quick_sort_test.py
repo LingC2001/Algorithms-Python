@@ -1,6 +1,7 @@
 import pytest
 import sys
-sys.path.append("./")
+import os
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from quick_sort import quick_sort_naive, quick_sort_hoare, quick_sort_DNF
 
 def test_empty():

@@ -1,6 +1,7 @@
 import pytest
 import sys
-sys.path.append("./")
+import os
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from heap_sort import heap_sort_py
 
 def test_empty_arr():

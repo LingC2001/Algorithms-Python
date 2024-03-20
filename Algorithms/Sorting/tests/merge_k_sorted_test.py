@@ -1,5 +1,6 @@
 import sys
-sys.path.append("./")
+import os
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from merge_k_sorted import merge_k_sorted
 import pytest
 

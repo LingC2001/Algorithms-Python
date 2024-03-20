@@ -1,6 +1,7 @@
 import pytest
 import sys
-sys.path.append("./")
+import os
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from bucket_sort import bucket_sort
 import random
 

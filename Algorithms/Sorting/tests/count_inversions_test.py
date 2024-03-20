@@ -1,6 +1,7 @@
 import pytest
 import sys
-sys.path.append("./")
+import os
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from count_inversions import count_inversions
 
 def test_empty_arr():

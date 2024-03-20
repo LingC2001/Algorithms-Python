@@ -1,5 +1,6 @@
 import sys
-sys.path.append("./")
+import os
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from binary_search import binary_search
 import pytest
 
