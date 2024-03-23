@@ -1,13 +1,13 @@
 import sys
 import os
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
-from depth_first_search import depth_first_search
+from connected_components import connected_components
 import pytest
 
 def test_empty():
     adj_matrix = []
-    res = depth_first_search(adj_matrix)
-    assert res == []
+    res = connected_components(adj_matrix)
+    assert res == (0, [])
 
 def test_1():
     # vertex 0 is connected to all other vetices
@@ -16,20 +16,17 @@ def test_1():
                   [1, 0, 0, 0, 0],
                   [1, 0, 0, 0, 0],
                   [1, 0, 0, 0, 0]]
-    res = depth_first_search(adj_matrix)
-    assert res == [0, 1, 2, 3, 4]
+    res = connected_components(adj_matrix)
+    assert res == (1, [1, 1, 1, 1, 1])
 
 def test_2():
-    # vertex 0 is connected to 1, which is connected to 3, which is connected to 2
-    # vertex 4 is not connected to anything but is still traversed since the algorithm
-    # is designed to traverse all nodes even if they are not connected
     adj_matrix = [[0, 1, 1, 0, 0],
                   [1, 0, 0, 1, 0],
                   [1, 0, 0, 1, 0],
                   [0, 1, 1, 0, 0],
                   [0, 0, 0, 0, 0]]
-    res = depth_first_search(adj_matrix)
-    assert res == [0, 1, 3, 2, 4]
+    res = connected_components(adj_matrix)
+    assert res == (2, [1, 1, 1, 1, 2])
 
 def test_3():
     adj_matrix = [[0, 1, 0, 0, 0],
@@ -37,5 +34,14 @@ def test_3():
                   [0, 0, 0, 0, 0],
                   [0, 1, 0, 0, 1],
                   [0, 0, 0, 1, 0]]
-    res = depth_first_search(adj_matrix)
-    assert res == [0, 1, 3, 4, 2]
+    res = connected_components(adj_matrix)
+    assert res == (2, [1, 1, 2, 1, 1])
+
+def test_4():
+    adj_matrix = [[0, 1, 1, 0, 0],
+                  [1, 0, 0, 0, 0],
+                  [1, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 1],
+                  [0, 0, 0, 1, 0]]
+    res = connected_components(adj_matrix)
+    assert res == (2, [1, 1, 1, 2, 2])

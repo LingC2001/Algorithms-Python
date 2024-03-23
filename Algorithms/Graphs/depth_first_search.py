@@ -1,5 +1,5 @@
 
-def dfs_traverse(adj_matrix):
+def depth_first_search(adj_matrix):
 
     def dfs(vertex):
         visited[vertex] = True
