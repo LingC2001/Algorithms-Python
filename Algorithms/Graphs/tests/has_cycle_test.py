@@ -16,7 +16,12 @@ def test_1():
                   [1, 0, 0, 0, 0],
                   [1, 0, 0, 0, 0],
                   [1, 0, 0, 0, 0]]
-    res = has_cycle(adj_matrix)
+    adj_list = [[1, 2, 3, 4],
+                [0],
+                [0],
+                [0],
+                [0]]
+    res = has_cycle(adj_list)
     assert res == False
 def test_2():
     adj_matrix = [[0, 1, 1, 0, 0],
@@ -24,7 +29,12 @@ def test_2():
                   [1, 0, 0, 1, 0],
                   [0, 1, 1, 0, 0],
                   [0, 0, 0, 0, 0]]
-    res = has_cycle(adj_matrix)
+    adj_list = [[1, 2],
+                [0, 3],
+                [0, 3],
+                [1, 2],
+                []]
+    res = has_cycle(adj_list)
     assert res == True
 
 def test_3():
@@ -33,7 +43,12 @@ def test_3():
                   [0, 0, 0, 0, 0],
                   [0, 1, 0, 0, 1],
                   [0, 0, 0, 1, 0]]
-    res = has_cycle(adj_matrix)
+    adj_list = [[1],
+                [0, 3],
+                [],
+                [1, 4],
+                [3]]
+    res = has_cycle(adj_list)
     assert res == False
 
 def test_4():
@@ -42,7 +57,12 @@ def test_4():
                   [1, 0, 0, 0, 0],
                   [0, 0, 0, 0, 1],
                   [0, 0, 0, 1, 0]]
-    res = has_cycle(adj_matrix)
+    adj_list = [[1,2],
+                [0],
+                [0],
+                [4],
+                [3]]
+    res = has_cycle(adj_list)
     assert res == False
 
 def test_5():
@@ -51,5 +71,10 @@ def test_5():
                   [1, 1, 0, 0, 0],
                   [0, 0, 0, 0, 1],
                   [0, 0, 0, 1, 0]]
-    res = has_cycle(adj_matrix)
+    adj_list = [[1, 2],
+                [0, 2],
+                [0, 1],
+                [4],
+                [3]]
+    res = has_cycle(adj_list)
     assert res == True
