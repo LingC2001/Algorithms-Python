@@ -10,8 +10,8 @@ Time Complexity:
 Space complexity
     In worst case the graph is a striaght line, therefore:
     Worst case aux space: O(V), not counting adj_matrix or adj_list used
-
-"""
+    Also because of the visited and res arrays created
+""" 
 
 
 def depth_first_search(adj_list):

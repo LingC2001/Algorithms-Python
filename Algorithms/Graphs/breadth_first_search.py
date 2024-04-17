@@ -14,6 +14,7 @@ Time Complexity:
 
 Space Complexity:
     The maximum size of the queue can be at one time is O(V)
+    Also visited is O(V)
 
 """
 

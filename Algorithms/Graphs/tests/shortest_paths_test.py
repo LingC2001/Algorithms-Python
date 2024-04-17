@@ -6,7 +6,8 @@ import pytest
 
 def test_empty():
     adj_matrix = []
-    res = shortest_paths(adj_matrix, None, [])
+    adj_list = []
+    res = shortest_paths(adj_list, None, [])
     assert res == []
 
 def test_empty_search():
@@ -16,7 +17,12 @@ def test_empty_search():
                   [1, 0, 0, 0, 0],
                   [1, 0, 0, 0, 0],
                   [1, 0, 0, 0, 0]]
-    res = shortest_paths(adj_matrix, 0, [])
+    adj_list = [[1, 2, 3, 4],
+                [0],
+                [0],
+                [0],
+                [0]]
+    res = shortest_paths(adj_list, 0, [])
     assert res == []
 
 def test_1():
@@ -26,7 +32,12 @@ def test_1():
                   [1, 0, 0, 0, 0],
                   [1, 0, 0, 0, 0],
                   [1, 0, 0, 0, 0]]
-    res = shortest_paths(adj_matrix, 0, [4])
+    adj_list = [[1, 2, 3, 4],
+                [0],
+                [0],
+                [0],
+                [0]]
+    res = shortest_paths(adj_list, 0, [4])
     assert res == [[0, 4]]
 
 def test_2():
@@ -35,7 +46,12 @@ def test_2():
                   [1, 0, 0, 1, 0],
                   [0, 1, 1, 0, 0],
                   [0, 0, 0, 0, 0]]
-    res = shortest_paths(adj_matrix, 0, [2])
+    adj_list = [[1, 2],
+                [0, 3],
+                [0, 3],
+                [1, 2],
+                []]
+    res = shortest_paths(adj_list, 0, [2])
     assert res == [[0, 2]]
 
 def test_no_path():
@@ -44,7 +60,12 @@ def test_no_path():
                   [1, 0, 0, 1, 0],
                   [0, 1, 1, 0, 0],
                   [0, 0, 0, 0, 0]]
-    res = shortest_paths(adj_matrix, 0, [4])
+    adj_list = [[1, 2],
+                [0, 3],
+                [0, 3],
+                [1, 2],
+                []]
+    res = shortest_paths(adj_list, 0, [4])
     assert res == [[]]
 
 def test_multi_search():
@@ -53,7 +74,12 @@ def test_multi_search():
                   [1, 0, 0, 1, 0],
                   [0, 1, 1, 0, 0],
                   [0, 0, 0, 0, 0]]
-    res = shortest_paths(adj_matrix, 0, [2,3,4])
+    adj_list = [[1, 2],
+                [0, 3],
+                [0, 3],
+                [1, 2],
+                []]
+    res = shortest_paths(adj_list, 0, [2,3,4])
     assert res == [[0, 2], [0, 1, 3], []]
 
 def test_3():
@@ -62,5 +88,10 @@ def test_3():
                   [1, 0, 0, 0, 0],
                   [1, 0, 0, 0, 0],
                   [1, 0, 0, 0, 0]]
-    res = shortest_paths(adj_matrix, 3, [1, 4])
+    adj_list = [[1, 2, 3, 4],
+                [0],
+                [0],
+                [0],
+                [0]]
+    res = shortest_paths(adj_list, 3, [1, 4])
     assert res == [ [3, 0, 1] ,[3, 0, 4]]

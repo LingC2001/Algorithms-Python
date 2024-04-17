@@ -11,7 +11,7 @@ Time Complexity:
 Space complexity
     In worst case the graph is a striaght line, therefore:
     Worst case aux space: O(V), not counting adj_matrix or adj_list used
-
+    ALso because of the visited array created
 """
 
 def has_cycle(adj_list):
