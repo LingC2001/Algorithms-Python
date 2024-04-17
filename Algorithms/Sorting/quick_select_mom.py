@@ -1,4 +1,18 @@
-import random
+"""
+Quick select (Median of Medians) complexity analysis:
+
+Time complexity:
+    Best/Avg/Worst case: O(n)
+
+Space complexity:
+    Best/Avg/Worst case: O(n), Median of medians call uses O(N/5) space for storing the medians
+    of groups of 5
+
+By using median of medians to choose the pivot, we can guarantee O(nlog(n)) time complexity
+for quick sort, since recursion depth is guaranteed to have a depth of log(n)
+
+"""
+
 
 def quick_select_mom(arr, lo, hi, k):
     """

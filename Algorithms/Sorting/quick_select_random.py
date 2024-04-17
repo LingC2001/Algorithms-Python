@@ -1,3 +1,25 @@
+"""
+Quick select (random pivot) complexity analysis
+
+Quick select is very similar to quicksort, however after each partition, 
+it drops roughly half of the elements, similar to binary search. E.g.
+If we want k = 7th element, and we got our pivot index = 6, then all the elements
+to the left of the pivot must not contain the 7th element, therefore can be dropped.
+
+Time complexity:
+    Best: O(n), when the first pivot selected is the kth element, then only 1 partitioning is done O(n)
+    Average: O(n)
+    Worst case: O(n^2), If only one element is dropped per partition
+
+Space complexity:
+    If in-place partitioning is used, and no tail-call optimization:
+    Best: O(1), when the first pivot selected is the kth element, then no recursive stack
+    Average: O(log(n)), if elements are halved every time, then log(n) recursion depth
+    Worst: O(n)
+
+"""
+
+
 import random
 def DNF_partition(arr, lo, hi, pivot):
     """

@@ -1,3 +1,22 @@
+"""
+Select minimum and maximum complexity analysis:
+
+By grouping the elements in groups of 2,
+then comparing the minimum with the smaller number
+then comparing the maximum with the larger number
+
+We only need to do 3 comparisons for every 2 numbers.
+Which is better than finding, max and then finding min separately
+Therefore:
+
+Time complexity:
+    O(1.5n)
+
+Space complexity:
+    O(1)
+
+"""
+
 
 def select_min_max(arr):
     if len(arr) == 0:
