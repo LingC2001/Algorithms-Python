@@ -6,7 +6,8 @@ import pytest
 
 def test_empty():
     adj_matrix = []
-    res = has_cycle(adj_matrix)
+    adj_list = []
+    res = has_cycle(adj_list)
     assert res == False
 
 def test_1():

@@ -6,7 +6,8 @@ import pytest
 
 def test_empty():
     adj_matrix = []
-    res = depth_first_search(adj_matrix)
+    adj_list = []
+    res = depth_first_search(adj_list)
     assert res == []
 
 def test_1():

@@ -6,7 +6,8 @@ import pytest
 
 def test_empty():
     adj_matrix = []
-    res = connected_components(adj_matrix)
+    adj_list = []
+    res = connected_components(adj_list)
     assert res == (0, [])
 
 def test_1():

@@ -6,7 +6,8 @@ import pytest
 
 def test_empty():
     adj_matrix = []
-    res = breadth_first_search(adj_matrix, None)
+    adj_list = []
+    res = breadth_first_search(adj_list, None)
     assert res == []
 
 def test_1():
@@ -16,7 +17,12 @@ def test_1():
                   [1, 0, 0, 0, 0],
                   [1, 0, 0, 0, 0],
                   [1, 0, 0, 0, 0]]
-    res = breadth_first_search(adj_matrix, 0)
+    adj_list = [[1, 2, 3, 4],
+                [0],
+                [0],
+                [0],
+                [0]]
+    res = breadth_first_search(adj_list, 0)
     assert res == [0, 1, 2, 3, 4]
 
 def test_2():
@@ -25,7 +31,12 @@ def test_2():
                   [1, 0, 0, 1, 0],
                   [0, 1, 1, 0, 0],
                   [0, 0, 0, 0, 0]]
-    res = breadth_first_search(adj_matrix, 0)
+    adj_list = [[1, 2],
+                [0, 3],
+                [0, 3],
+                [1, 2],
+                []]
+    res = breadth_first_search(adj_list, 0)
     assert res == [0, 1, 2, 3]
 
 def test_3():
@@ -34,7 +45,12 @@ def test_3():
                   [0, 0, 0, 0, 0],
                   [0, 1, 0, 0, 1],
                   [0, 0, 0, 1, 0]]
-    res = breadth_first_search(adj_matrix, 0)
+    adj_list = [[1],
+                [0, 3],
+                [],
+                [1, 4],
+                [3]]
+    res = breadth_first_search(adj_list, 0)
     assert res == [0, 1, 3, 4]
 
 def test_4():
@@ -43,7 +59,12 @@ def test_4():
                   [1, 0, 0, 0, 0],
                   [0, 0, 0, 0, 1],
                   [0, 0, 0, 1, 0]]
-    res = breadth_first_search(adj_matrix, 0)
+    adj_list = [[1,2],
+                [0],
+                [0],
+                [4],
+                [3]]
+    res = breadth_first_search(adj_list, 0)
     assert res == [0, 1, 2]
 
 def test_5():
@@ -52,7 +73,12 @@ def test_5():
                   [1, 1, 0, 0, 0],
                   [0, 0, 0, 0, 1],
                   [0, 0, 0, 1, 0]]
-    res = breadth_first_search(adj_matrix, 0)
+    adj_list = [[1, 2],
+                [0, 2],
+                [0, 1],
+                [4],
+                [3]]
+    res = breadth_first_search(adj_list, 0)
     assert res == [0, 1, 2]
 
 def test_6():
@@ -61,5 +87,10 @@ def test_6():
                   [1, 0, 0, 0, 0],
                   [1, 0, 0, 0, 0],
                   [1, 0, 0, 0, 0]]
-    res = breadth_first_search(adj_matrix, 3)
+    adj_list = [[1, 2, 3, 4],
+                [0],
+                [0],
+                [0],
+                [0]]
+    res = breadth_first_search(adj_list, 3)
     assert res == [3, 0, 1, 2, 4]
