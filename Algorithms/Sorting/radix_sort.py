@@ -1,3 +1,34 @@
+"""
+Radix sort complexity analysis
+
+Radix sort simply applies counting sort k-times, once for each digit of the 
+input. The range of numbers for each counting sort is just b, where b is the base
+of the digits. E.g. counting sort in base 10, would have a range of 10,
+aka. u = b = 10
+
+Time complexity
+    Each counting sort takes O(n + b) time.
+    Therefore radix sort for k-digit integers would be:
+    O(k(n+b))
+
+Space complexity:
+    Just the space complexity of each counting sort
+    O(n+b)
+
+    
+Notice that number of digits "k" and the base "b" are inversely porpotionate.
+larger base = less digits and smaller base = more digits.
+More specifically: k = w/log(b)
+So, time: O(w/log(b) * (n+b))
+We want as large of a base as possible to minimize k and not slow down individual 
+counting sort. Therefore we choose b = n, so that counting sort is still O(n)
+Therefore time: O(w/log(n) * n), space: O(n)
+Hence, radix sort is still O(n) as long as w/log(n) = O(1), aka w <= log(n). 
+aka. when radix sort has integers of at most c*log(n) bits.
+
+
+"""
+
 
 def radix_sort(nums):
     """
