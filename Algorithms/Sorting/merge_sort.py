@@ -1,3 +1,24 @@
+"""
+Merge sort complexity analysis:
+
+Time complexity:
+    The input is halved at every level until there is only 1 element left.
+    Therefore the depth is O(log2(n)).
+    At each level, n-elements are merged therefore O(n)
+    So in total, O(nlog(n))
+
+Space complexity:
+    Firstly, we can see that in each recursive call, we pass down half of the array.
+    Therefore, the call stack uses at most O(3n)
+        - which can be optimized to O(1) if we used indicies instead of list splicing
+
+    The merge routine creates a new merged array every merge function call, 
+    which at most O(n), however this memory is freed as soon as the merge finishes.
+
+    So total space complexity: O(n)
+
+"""
+
 
 def merge_sort(nums):
     if len(nums) <= 1: # base case only 1 element left

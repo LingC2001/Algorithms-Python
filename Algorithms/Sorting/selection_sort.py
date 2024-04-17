@@ -1,3 +1,17 @@
+"""
+Selection Sort complexity analysis:
+
+Time complexity:
+    For every number, it finds the next minimum value.
+    Therefore T(n) = n + (n-1) + (n-2) ... = n(n+1)/2 
+    Therefore O(n^2)
+
+Space complexity:
+    we do not create any new arrays or anything, it is all done in-place
+    Therefore O(1)
+
+"""
+
 
 def selection_sort(nums):
 

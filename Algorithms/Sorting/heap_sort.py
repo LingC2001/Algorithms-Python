@@ -1,3 +1,22 @@
+"""
+Heap Sort complexity analysis:
+
+Time complexity:
+    Heapsort first heapifies the array, which is O(n)
+    Heapsort extracts the minimum element from the heap n-times.
+    Which would be worst case: O(n log(n)), since each get_min is O(log(n))
+    However best case: O(n), when all elements in heap are identical, then get_min
+    would be O(1).
+    Worst case: O(nlog(n))
+    Best case: O(n)
+
+Space complexity:
+    Since heapify is done in-place, heapsort actually has O(1) auxiliary space complexity.
+    
+
+"""
+
+
 import heapq
 
 def heap_sort_py(nums):

@@ -1,3 +1,39 @@
+"""
+Quick sort time complexity:
+
+Time complexity:
+    At each level, the partitioning takes O(n) total time.
+    Therefore the time complexity depends entirely on the number of levels,
+    which depend on the quality of the pivot.
+    Best case: O(nlog(n)), when the pivot is always the median, then the input is halved
+    at every level, therfore only log2(n) levels.
+
+    Worst case: O(n^2), when the pivot is always the minimum or maximum, then the input
+    is reduced by 1 every level, therefore n levels
+
+    Average case: O(nlog(n)), can be proven using coin-flip argument, assuming theres a
+    50% change to get a good pivot and 50% change to get a bad one. (the middle 50% of the
+    sorted sequence is a good pivot)
+
+
+Space complexity:
+    The space complexity of quicksort depends on the recursion stack as well as the partitioning
+    method used.
+    If we used naive partitioning, then we can see that auxiliary space is O(n), because of the new
+    array created
+    Worst/Avg/Best: O(n)
+
+    If we used Hoare or DNF partitioning, which are in-place, then the aux space is the recursion stack
+    depth. When pivot is bad, this could lead to O(n) recursion depth, therefore:
+    Worst: O(n)
+    Avg/best: O(log(n))
+
+    However, if we performed tail recursion optimization, then we can reduce the worst case
+    aux space complexity to be:
+    Worst: O(log(n))
+
+"""
+
 
 def naive_partition(arr, lo, hi, pivot):
     """

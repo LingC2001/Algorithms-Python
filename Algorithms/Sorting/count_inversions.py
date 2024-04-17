@@ -1,3 +1,17 @@
+"""
+Count inversion complexity analysis:
+
+Time complexity:
+    Count inversion uses mergesort, only adding a constant time operation of
+    count while merging.
+    Therefore O(nlog(n))
+
+Space complexityL:
+    Same as merge sort
+    O(n)
+
+"""
+
 
 def count_inversions(nums):
     if len(nums) <= 1:

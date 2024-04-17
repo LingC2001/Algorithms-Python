@@ -1,3 +1,16 @@
+"""
+Karatsuba multiplication algorithm complexity analysis:
+
+Time complexity:
+    The recurrence relation is: T(n) = 3T(n/2) + cn
+    Solving this with induction gives O(n^1.59)
+
+Space complexity:
+    Since the pad_size function converts the numbers to strings,
+    therefore, O(n)
+
+"""
+
 def pad_size(num1, num2):
     snum1 = str(num1)
     snum2 = str(num2)
