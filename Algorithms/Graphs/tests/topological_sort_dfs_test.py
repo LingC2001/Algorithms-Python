@@ -6,7 +6,8 @@ import pytest
 
 def test_empty():
     adj_matrix = []
-    res = topological_sort_dfs(adj_matrix)
+    adj_list = []
+    res = topological_sort_dfs(adj_list)
     assert res == []
 
 def test_line_graph():
@@ -20,7 +21,16 @@ def test_line_graph():
                   [0, 0, 0, 0, 0, 1, 0],
                   [0, 0, 0, 0, 0, 0, 1],
                   [0, 0, 0, 0, 0, 0, 0]]
-    res = topological_sort_dfs(adj_matrix)
+    
+    adj_list = [[1],
+                [2],
+                [4],
+                [0],
+                [5],
+                [6],
+                []]
+    
+    res = topological_sort_dfs(adj_list)
     print(res)
     idx = [-1]*len(adj_matrix)
     for i in range(len(res)):
@@ -44,7 +54,15 @@ def test_two_lines():
                   [0, 0, 0, 0, 0, 0, 0],
                   [0, 0, 0, 0, 0, 0, 1],
                   [0, 0, 0, 0, 0, 0, 0]]
-    res = topological_sort_dfs(adj_matrix)
+    adj_list = [[1],
+                [2],
+                [4],
+                [0],
+                [],
+                [6],
+                []]
+    
+    res = topological_sort_dfs(adj_list)
     print(res)
     idx = [-1]*len(adj_matrix)
     for i in range(len(res)):
@@ -64,7 +82,15 @@ def test_not_connected():
                   [0, 0, 0, 0, 0, 0, 0],
                   [0, 0, 0, 0, 0, 0, 0],
                   [0, 0, 0, 0, 0, 0, 0]]
-    res = topological_sort_dfs(adj_matrix)
+    adj_list = [[],
+                [],
+                [],
+                [],
+                [],
+                [],
+                []]
+    
+    res = topological_sort_dfs(adj_list)
     print(res)
     idx = [-1]*len(adj_matrix)
     for i in range(len(res)):
@@ -92,7 +118,15 @@ def test_general():
                   [0, 0, 0, 0, 0, 1, 0],
                   [0, 0, 0, 0, 0, 0, 1],
                   [0, 0, 0, 0, 0, 0, 0]]
-    res = topological_sort_dfs(adj_matrix)
+    adj_list = [[2],
+                [2],
+                [6],
+                [4],
+                [5],
+                [6],
+                []]
+    
+    res = topological_sort_dfs(adj_list)
     print(res)
     idx = [-1]*len(adj_matrix)
     for i in range(len(res)):
