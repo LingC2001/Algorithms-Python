@@ -1,3 +1,26 @@
+"""
+Kruskal's Algorithm complexity analysis:
+
+Time complexity:
+    All the edges are first sorted, O(Elog(E))
+        This is why edge list representation would work best for this algorithm.
+        Otherwise we would need to extract the edges and put them in one list,
+        which is O(E) for adj_list and O(V^2) for adj_matrix
+
+    For each edge, UnionFind operations are performed, 
+        without optimisation, it would be O(log(V)) for each operation, so O(ELog(V))
+        with both path compression and union by rank, it would be approx O(1) for each operation, so O(E)
+    
+    In total, it is just O(ELog(E)), and for simple graphs, since O(Log(E)) = O(Log(V^2)) = O(2Log(V))
+    it is O(ELog(V))
+
+Space complexity:
+    O(V^2) for the adjacency matrix of the new Tree
+        if it was adj_matrix instead, would be O(V + E)
+    O(E) for the edge list
+"""
+
+
 from union_find import UnionFind
 
 def kruskal_mst(G):
@@ -7,7 +30,9 @@ def kruskal_mst(G):
     the selected edge will create a cycle or not.
 
     Kruskal's algorithm uses Greedy approach and selects the minimum
-    weighted edge in the entire graph every iteration.
+    weighted edge in the entire graph every iteration, that does not create a cycle.
+    Since it doesn't have to start at a specific node, it can actually find multiple
+    disconnected MSTs.
 
     """
     n = len(G)
@@ -18,10 +43,9 @@ def kruskal_mst(G):
     
     # extract all edges from graph
     E = []
-    for u in range(n):
-        for v in range(n):
-            if G[u][v] != 0:
-                E.append((G[u][v], (u, v)))
+    for u in range(len(G)):
+        for e in G[u]:
+            E.append((e[1], (u, e[0])))
 
     # sort edges for minimum weight
     E.sort(key= lambda x: x[0])
