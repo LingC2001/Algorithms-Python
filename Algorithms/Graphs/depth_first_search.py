@@ -4,7 +4,9 @@ DFS complexity analysis
 Each vertex is visited once, and all the outgoing edges of the vertex are checked.
 
 Time Complexity:
-    Using an adjacency list: O(V + E) for directed and O(V + 2E) for undirected graphs
+    Using an adjacency list: O(V + E) for directed and O(V + 2E) for undirected graphs,
+    where E could be O(V^2) in a very dense/fully connected graph.
+    
     Using an adjacency matrix: O(V^2), since V columns are checked for each Vertex.
 
 Space complexity

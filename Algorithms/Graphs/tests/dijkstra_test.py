@@ -36,6 +36,15 @@ def test_undirected_1():
          [0, 0, 1, 0, 6, 0, 3, 0],
          [0, 0, 0, 0, 0, 3, 0, 2],
          [0, 0, 0, 0, 6, 0, 3, 0]]
+    
+    # creating adj list:
+    G_list = [[] for i in range(len(G))]
+    for i in range(len(G)):
+        for j in range(len(G)):
+            if G[i][j] != 0:
+                G_list[i].append((j, G[i][j]))
+    G = G_list
+
     s = 0
 
     dist, pred = dijkstra(G, s)
@@ -68,6 +77,13 @@ def test_undirected_2():
          [0, 0, 1, 0, 6, 0, 3, 0],
          [0, 0, 0, 0, 0, 3, 0, 2],
          [0, 0, 0, 0, 6, 0, 3, 0]]
+    # creating adj list:
+    G_list = [[] for i in range(len(G))]
+    for i in range(len(G)):
+        for j in range(len(G)):
+            if G[i][j] != 0:
+                G_list[i].append((j, G[i][j]))
+    G = G_list
     s = 2
 
     dist, pred = dijkstra(G, s)
@@ -103,6 +119,13 @@ def test_directed():
          [0, 0, 0, 0, 0, 0, 3, 0],
          [0, 0, 0, 0, 0, 0, 0, 2],
          [0, 0, 0, 0, 0, 0, 0, 0]]
+    # creating adj list:
+    G_list = [[] for i in range(len(G))]
+    for i in range(len(G)):
+        for j in range(len(G)):
+            if G[i][j] != 0:
+                G_list[i].append((j, G[i][j]))
+    G = G_list
     s = 0
 
     dist, pred = dijkstra(G, s)
@@ -137,6 +160,14 @@ def test_paths():
          [0, 0, 0, 0, 0, 0, 3, 0],
          [0, 0, 0, 0, 0, 0, 0, 2],
          [0, 0, 0, 0, 0, 0, 0, 0]]
+    
+    # creating adj list:
+    G_list = [[] for i in range(len(G))]
+    for i in range(len(G)):
+        for j in range(len(G)):
+            if G[i][j] != 0:
+                G_list[i].append((j, G[i][j]))
+    G = G_list
     s = 0
 
     dist, pred = dijkstra(G, s)

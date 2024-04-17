@@ -1,3 +1,20 @@
+"""
+Prim's algorithm for minimum spanning tree
+
+Time and space complexity exactly the same as dijkstra's algorithm
+
+Time complexity: (with priority queue, min_heap)
+    adj_list: O(VLog(V) + ELog(V))
+    adj_matrix: O(VLog(V) + ELog(V) + (V^2-E))
+
+Aux space complexity:
+    O(V) for the dist, pred arrays, and O(E) for the heap
+    so, O(E+V)
+
+
+"""
+
+
 import math
 import heapq
 
@@ -35,11 +52,12 @@ def prim_mst(G, r):
         key, u = heapq.heappop(min_heap)
         if key == dist[u]: # if dist up to date, is the minimum edge to u from parent[u]
             visited[u] = True
-            for v in range(len(G[u])):
-                if G[u][v] != 0: # for all the edges coming out from the node
-                    if not visited[v] and dist[v] > G[u][v]:
-                        dist[v] = G[u][v]
-                        parent[v] = u
-                        heapq.heappush(min_heap, (dist[v], v))
+            for e in G[u]: # for all the edges coming out from the node
+                v = e[0]
+                w = e[1]
+                if not visited[v] and dist[v] > w:
+                    dist[v] = w # dist = edge weight, instead of path length like in dijkstras
+                    parent[v] = u
+                    heapq.heappush(min_heap, (dist[v], v))
     
     return dist, parent

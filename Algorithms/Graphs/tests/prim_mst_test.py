@@ -24,6 +24,15 @@ def test_triangle():
     G = [[0, 2, 2],
          [2, 0, 1],
          [2, 1, 0]]
+    
+    # creating adj list:
+    G_list = [[] for i in range(len(G))]
+    for i in range(len(G)):
+        for j in range(len(G)):
+            if G[i][j] != 0:
+                G_list[i].append((j, G[i][j]))
+    G = G_list
+
     s = 0
     dist, parent = prim_mst(G, s)
     assert dist == [0, 2, 1]
@@ -48,6 +57,16 @@ def test_undirected_1():
          [0, 0, 1, 0, 6, 0, 3, 0],
          [0, 0, 0, 0, 0, 3, 0, 2],
          [0, 0, 0, 0, 6, 0, 3, 0]]
+    
+    # creating adj list:
+    G_list = [[] for i in range(len(G))]
+    for i in range(len(G)):
+        for j in range(len(G)):
+            if G[i][j] != 0:
+                G_list[i].append((j, G[i][j]))
+    G = G_list
+
+
     s = 0
 
     dist, parent = prim_mst(G, s)
@@ -72,6 +91,16 @@ def test_undirected_2():
          [0, 0, 1, 0, 6, 0, 3, 0],
          [0, 0, 0, 0, 0, 3, 0, 2],
          [0, 0, 0, 0, 6, 0, 3, 0]]
+    
+    # creating adj list:
+    G_list = [[] for i in range(len(G))]
+    for i in range(len(G)):
+        for j in range(len(G)):
+            if G[i][j] != 0:
+                G_list[i].append((j, G[i][j]))
+    G = G_list
+
+    
     s = 2
 
     dist, parent = prim_mst(G, s)
