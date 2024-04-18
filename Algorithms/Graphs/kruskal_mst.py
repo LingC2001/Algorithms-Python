@@ -16,7 +16,7 @@ Time complexity:
 
 Space complexity:
     O(V^2) for the adjacency matrix of the new Tree
-        if it was adj_matrix instead, would be O(V + E)
+        if it was adj_list instead, would be O(V + E)
     O(E) for the edge list
 """
 
