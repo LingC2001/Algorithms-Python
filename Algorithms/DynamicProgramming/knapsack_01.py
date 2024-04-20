@@ -1,3 +1,21 @@
+"""
+knapsack 01 complexity analysis:
+
+Time complexity:
+    The number of subproblems is n*C
+        it finds the max value for each capacity for all items up until i.
+        e.g. the first row contains all the max values for only using the first item
+        the second tow contains all the max values for only using the items 1-2
+        - Each subproblem only looks at
+
+Space complexity:
+    The memo table is O(nC)
+    However notice how the each subproblem strictly only requires the previous row.
+    So if we do bottom up approach, we can compute the memo table one row at a time
+    and only ever store 2 rows of the dp table in memory. Hence O(C) is achieveable
+
+"""
+
 
 def knapsack_01(values, weights, capacity):
     n = len(values)

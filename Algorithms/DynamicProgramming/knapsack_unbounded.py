@@ -1,3 +1,16 @@
+"""
+Unbound knapsack problem complexity analysis
+
+Time complexity:
+    Number of subproblems: O(C), for each capacity
+    Each subproblem tries every item, n-items
+    Therefore total: O(nC)
+
+Space complexity:
+    memo table size: O(C)
+
+"""
+
 
 def knapsack_unbounded_TD(values, weights, capacity):
     if len(values) == 0 or capacity <= 0:

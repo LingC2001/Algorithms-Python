@@ -1,3 +1,18 @@
+"""
+Coin Change complexity analysis:
+
+Time complexity:
+    The number of sub problems is O(V), we need to compute the minimum number
+    of coins for each value up intil V.
+    Each subproblem checks all n coins.
+    Therefore total complexity: O(nV)
+
+Space complexity:
+    memo table size: O(V)
+
+"""
+
+
 import math
 
 def coin_change_bottom_up(coins, amount):
