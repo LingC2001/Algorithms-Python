@@ -6,6 +6,14 @@ Time complexity:
     Each augmenting path may only increase the flow by the minimum of 1 unit of flow.
     Therefore time complexity: O(E*max_flow)
 
+    BFS could be used instead to find the augmenting path, which results in always
+    finding the shortest augmenting path. This is called Edmonds-Karp algorithm
+    which has time complexity of O(V*E^2)
+
+    There is also another algorith called "Fattest augmenting path algorithm" which
+    finds the augmenting path with the largest capacity using maximum spanning tree.
+    This has O(E^2 * Log(V) * Log(E * max_cap)) 
+
 Auxiliary Space complexity:
     If using adj_list:
         O(V+E) 
@@ -28,6 +36,7 @@ class edge:
 def ford_fulkerson(adj_list, source, sink):
     """
     Perfroms Ford-Fulkersons's method for determining maximum flow in a network
+    NOTE: The max_flow of a network is equivalent to the minimut-cut of the network.
 
     Some definitions:
         Residual network: A graph G_f that has a forward edge and backward edge for
@@ -101,7 +110,7 @@ def ford_fulkerson(adj_list, source, sink):
         augment = dfs(res_graph, visited, source, sink, float('inf'))
         max_flow += augment
     
-    return max_flow
+    return max_flow, res_graph
 
 
 def dfs(res_graph, visited, u, sink, bottleneck):

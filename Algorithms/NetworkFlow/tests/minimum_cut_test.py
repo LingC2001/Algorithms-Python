@@ -1,7 +1,7 @@
 import sys
 import os
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
-from ford_fulkerson import ford_fulkerson
+from minimum_cut import minimum_cut
 import pytest
 
 
@@ -36,13 +36,10 @@ def test_1():
                 G_list[i].append((j, G[i][j]))
     G = G_list
 
-    assert ford_fulkerson(G, 0, 7)[0] == 2
-    
-    # below are technically invalid tests because sources must have indegree of 0
-    # and sinks must have outdegree of 0
-    assert ford_fulkerson(G, 4, 7)[0] == 8 
-    assert ford_fulkerson(G, 5, 4)[0] == 0
-    assert ford_fulkerson(G, 2, 7)[0] == 1
+    assert minimum_cut(G, 0, 7) == (2, {3, 0}, {1, 2, 4, 5, 6, 7}) \
+        or minimum_cut(G, 0, 7) == (2, {0, 1, 2, 3}, {4, 5, 6, 7})
+
+    assert minimum_cut(G, 0, 1) == (1, {0, 3, 4, 5, 6, 7}, {2, 1} )
 
 def test_2():
     G = [[0, 8, 0, 0, 3, 0],
@@ -60,13 +57,4 @@ def test_2():
                 G_list[i].append((j, G[i][j]))
     G = G_list
 
-    assert ford_fulkerson(G, 0, 5)[0] == 5
-
-    # technically invalid tests
-    assert ford_fulkerson(G, 2, 5)[0] == 2
-    assert ford_fulkerson(G, 4, 5)[0] == 6
-    assert ford_fulkerson(G, 1, 5)[0] == 2
-    assert ford_fulkerson(G, 3, 5)[0] == 5
-
-    assert ford_fulkerson(G, 0, 2)[0] == 11
-    assert ford_fulkerson(G, 1, 0)[0] == 0
+    assert minimum_cut(G, 0, 5) == (5, {0, 1, 2}, {3, 4, 5}) 
