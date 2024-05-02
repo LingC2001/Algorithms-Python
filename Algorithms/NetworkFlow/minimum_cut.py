@@ -4,6 +4,7 @@ These are same as the maximum flow problem. Refer to ford_fulkerson.py for detai
 
 Time complexity:
     O(E*max_flow)
+        + O(E+V) for the dfs to find reachable nodes
 
 Aux space complexity:
     O(V + E)
