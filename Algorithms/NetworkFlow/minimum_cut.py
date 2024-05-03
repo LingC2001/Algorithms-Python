@@ -47,7 +47,7 @@ def dfs(res_graph, visited, u, reachable):
     reachable.add(u)
     
     for e in res_graph[u]:
-        v = e.next
+        v = e.v
         residual = e.cap - e.flow
         if residual > 0 and not visited[v]:
             dfs(res_graph, visited, v, reachable)

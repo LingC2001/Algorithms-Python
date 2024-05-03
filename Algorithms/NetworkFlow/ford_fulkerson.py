@@ -28,10 +28,10 @@ class edge:
     The pointer to the back edge is crucial to avoid O(V) searching.
     """
     def __init__(self, v, cap, flow=0, back=None):
-        self.next = v
+        self.v = v
         self.cap = cap
         self.flow = flow
-        self.back = None
+        self.back = back
 
 def ford_fulkerson(adj_list, source, sink):
     """
@@ -95,12 +95,15 @@ def ford_fulkerson(adj_list, source, sink):
         for e in adj_list[u]:
             v = e[0]
             cap = e[1]
+            
             new_edge = edge(v, cap, flow=0, back=None)
             back_edge = edge(u, 0, flow=0, back=new_edge)
             new_edge.back = back_edge
 
             res_graph[u].append(new_edge)
+            # print(f"adding foward edge {u} -> {new_edge.v}: {new_edge}")
             res_graph[v].append(back_edge)
+            # print(f"adding back edge {v} -> {back_edge.v}: {back_edge}")
 
     # repeated augmenting path until max_flow cannot be increased
     max_flow = 0
@@ -119,7 +122,7 @@ def dfs(res_graph, visited, u, sink, bottleneck):
     visited[u] = True
 
     for e in res_graph[u]:
-        v = e.next
+        v = e.v
         residual = e.cap - e.flow
         
         # if edge still has residual and we have not visited yet, continue dfs this path

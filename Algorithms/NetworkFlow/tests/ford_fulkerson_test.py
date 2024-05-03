@@ -70,3 +70,95 @@ def test_2():
 
     assert ford_fulkerson(G, 0, 2)[0] == 11
     assert ford_fulkerson(G, 1, 0)[0] == 0
+
+# AI tests
+
+def test_ford_fulkerson():
+    adj_list = [
+        [(1, 2), (2, 3)],
+        [(2, 1), (3, 1)],
+        [(3, 2)],
+        []
+    ]
+    max_flow, _ = ford_fulkerson(adj_list, 0, 3)
+    assert max_flow == 3
+
+def test_ford_fulkerson_no_path():
+    adj_list = [
+        [(1, 2)],
+        [(2, 1)],
+        [],
+        []
+    ]
+    max_flow, _ = ford_fulkerson(adj_list, 0, 3)
+    assert max_flow == 0
+
+def test_ford_fulkerson_multiple_paths():
+    adj_list = [
+        [(1, 2), (2, 2)],
+        [(2, 1), (3, 1)],
+        [(3, 2)],
+        []
+    ]
+    max_flow, _ = ford_fulkerson(adj_list, 0, 3)
+    assert max_flow == 3
+
+def test_ford_fulkerson_back_edge():
+    adj_list = [
+        [(1, 2)],
+        [(0, 1), (2, 1)],
+        [(3, 2)],
+        []
+    ]
+    max_flow, _ = ford_fulkerson(adj_list, 0, 3)
+    assert max_flow == 1
+
+def test_ford_fulkerson_self_loop():
+    adj_list = [
+        [(0, 2), (1, 2)],
+        [(2, 1)],
+        [(3, 2)],
+        []
+    ]
+    max_flow, _ = ford_fulkerson(adj_list, 0, 3)
+    assert max_flow == 1
+
+def test_ford_fulkerson_multiple_paths1():
+    adj_list = [
+        [(1, 3), (2, 2)],
+        [(3, 3)],
+        [(3, 2)],
+        []
+    ]
+    max_flow, _ = ford_fulkerson(adj_list, 0, 3)
+    assert max_flow == 5
+
+def test_ford_fulkerson_self_loop1():
+    adj_list = [
+        [(1, 2), (0, 100)],
+        [(2, 2)],
+        [(3, 2)],
+        []
+    ]
+    max_flow, _ = ford_fulkerson(adj_list, 0, 3)
+    assert max_flow == 2
+
+def test_ford_fulkerson_multiple_paths2():
+    adj_list = [
+        [(1, 2), (2, 3)],
+        [(2, 1), (3, 2)],
+        [(3, 3)],
+        []
+    ]
+    max_flow, _ = ford_fulkerson(adj_list, 0, 3)
+    assert max_flow == 5
+
+def test_ford_fulkerson_self_loop2():
+    adj_list = [
+        [(1, 2)],
+        [(1, 1), (2, 3)],
+        [(3, 2)],
+        []
+    ]
+    max_flow, _ = ford_fulkerson(adj_list, 0, 3)
+    assert max_flow == 2
