@@ -12,50 +12,43 @@ Auxiliary Space complexity:
 """
 import math
 
-def bellman_ford(adj_list, s):
+def bellman_ford(adj_list, start_node):
     """
-    Perfroms Bellman-Ford algorithm to find the single source shortest path problem. 
+    Performs Bellman-Ford algorithm to find the single source shortest path problem.
     Finds the shortest path to all nodes from a starting node.
     Slower than Dijkstra's but works for graphs with negative edges or negative cycles.
-
     """
-    n = len(adj_list)
-    dist = [math.inf] * n
-    pred = [None] * n
-    dist[s] = 0
+    num_nodes = len(adj_list)
+    distance = [math.inf] * num_nodes
+    predecessor = [None] * num_nodes
+    distance[start_node] = 0
 
-    for i in range(n-1): # perform V-1 iterations to guanrantee correctness
-        # relax all edges
-        improved = 0
-        for u in range(n):
-            for e in adj_list[u]:
-                v = e[0]
-                w = e[1]
+    def relax_edges(negative_cycle_detection=False):
+        improved = False
+        for u in range(num_nodes):
+            for v, weight in adj_list[u]:
                 # relax
-                if dist[u] + w < dist[v]:
-                    dist[v] = dist[u] + w
-                    pred[v] = u
-                    improved += 1
-        if improved == 0:
+                if distance[u] + weight < distance[v]:
+                    if not negative_cycle_detection:
+                        distance[v] = distance[u] + weight
+                        predecessor[v] = u
+                        improved = True
+                    else:
+                        # any edges that can be relaxed must be reachable from a negative cycle
+                        distance[v] = -math.inf
+                        predecessor[v] = None
+                        improved = True
+
+        return improved
+
+    # perform V-1 iterations to guarantee correctness
+    for _ in range(num_nodes - 1):
+        if not relax_edges():
             break
 
-    
     # second iteration of Bellman-Ford to detect negative cycles
-    for i in range(n-1): # perform V-1 iterations to guanrantee correctness
-        # relax all edges
-        improved = 0
-        for u in range(n):
-            for e in adj_list[u]:
-                v = e[0]
-                w = e[1]
-                # relax
-                if dist[u] + w < dist[v]:
-                    # any edges than can be relaxed aka
-                    # any nodes distances that can be improved must be reachable from a negative cycle
-                    dist[v] = -math.inf
-                    pred[v] = None
-                    improved += 1
-        if improved == 0:
+    for _ in range(num_nodes - 1):
+        if not relax_edges(True):
             break
-    
-    return dist, pred
+
+    return distance, predecessor
