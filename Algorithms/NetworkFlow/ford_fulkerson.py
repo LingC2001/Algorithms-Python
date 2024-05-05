@@ -27,10 +27,11 @@ class edge:
     each edge could be in the form of (v, cap, flow, back).
     The pointer to the back edge is crucial to avoid O(V) searching.
     """
-    def __init__(self, v, cap, flow=0, back=None):
+    def __init__(self, v, cap, flow=0, back=None, is_back=False):
         self.v = v
         self.cap = cap
         self.flow = flow
+        self.is_back_edge = is_back
         self.back = back
 
 def ford_fulkerson(adj_list, source, sink):
@@ -96,8 +97,8 @@ def ford_fulkerson(adj_list, source, sink):
             v = e[0]
             cap = e[1]
             
-            new_edge = edge(v, cap, flow=0, back=None)
-            back_edge = edge(u, 0, flow=0, back=new_edge)
+            new_edge = edge(v, cap, flow=0, back=None, is_back=False)
+            back_edge = edge(u, 0, flow=0, back=new_edge, is_back=True)
             new_edge.back = back_edge
 
             res_graph[u].append(new_edge)
