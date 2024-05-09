@@ -45,24 +45,19 @@ def circulations_with_demands(graph, demands):
         
     """
     # checking initial demand constriants
-    total_demand = 0
-    for i in range(len(demands)):
-        total_demand += demands[i]
-    if total_demand != 0:
+    if sum(demands) != 0:
         return False
 
     # Construct new G* graph
     n = len(graph)
-    demands_star = [x for x in demands]
+    demands_star = demands.copy()
     G_star = [[] for _ in range(n)]
     
     # update capacities and demands
     for u in range(n):
         for v in range(n):
             if graph[u][v] is not None:
-                e = graph[u][v]
-                lower = e[0]
-                cap = e[1]
+                lower, cap = graph[u][v]
                 G_star[u].append((v, cap-lower))
                 demands_star[u] += lower
                 demands_star[v] -= lower
