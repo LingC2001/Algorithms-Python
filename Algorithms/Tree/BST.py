@@ -39,7 +39,7 @@ class BST:
             counts = []
 
             # counting duplicates
-            prev = num[0]
+            prev = array[0]
             count = 0
             for num in array:
                 if num == prev:
@@ -50,7 +50,7 @@ class BST:
                     count = 1
             counts.append((prev, count)) # adding last number
 
-            self.bst = self.convert(array, 0, len(counts))
+            self.bst = self.convert(counts, 0, len(counts))
             self.size = len(array)
 
     def convert(self, array, start, end):
@@ -97,6 +97,7 @@ class BST:
                     curr = curr.left
                 else: # already exists in BST
                     curr.count += 1
+                    return
 
             # add node
             if direction == 0:
@@ -106,48 +107,50 @@ class BST:
 
     def delete(self, key):
         """
-        Iterative deletion of a node in BST
+        Recursive deletion of a node. This deletes all occurrences of a key. Can be modified
+        so that it deletes one occurrence by decrementing the count
 
         1. Search for the node
         2. Check the number of children
         3. If leaf node (no children), just remove;
            If one children, just remove and attach parent to children
-           If two children, find the successor (next biggest) and move here
+           If two children, find the successor (next biggest) and move here, then delete successor node
+        
+        Time complexity: O(N)
+        Space complexity: O(N)
         """
 
-        curr = self.bst
-        # 1. find
-        while curr:
-            if key > curr.val:
-                prev = curr
-                direction = 1
-                curr = curr.right
-            elif key < curr.val:
-                prev = curr
-                direction = 0
-                curr = curr.left
-            else: # found
-                # 2. check children
-                if not curr.left and not curr.right:
-                    if direction == 0:
-                        prev.left = None
-                    else:
-                        prev.right = None
-                elif curr.left and not curr.right:
-                    if direction == 0:
-                        prev.left = curr.left
-                    else:
-                        prev.right = curr.left
-                elif not curr.left and curr.right:
-                    if direction == 0:
-                        prev.left = curr.right
-                    else:
-                        prev.right = curr.right
-                else: # two children
-                    # find sucessor
-                    pass
+        self.aux_delete(self.bst, key)
+
+    
+    def aux_delete(self, node, key):
+        if node is None:
+            return node
+
+        if key > node.val:
+            node.right = self.aux_delete(node.right, key)
+        elif key < node.val:
+            node.left = self.aux_delete(node.left, key)
+        else:
+            # one no children
+            if node.left is None:
+                return node.right
+            elif node.right is None:
+                return node.left
+            else: # 2 children
+                swap_key, swap_count = self.successor(node)
+                node.key = swap_key
+                node.count = swap_count
+
+                # delete successor
+                node.right = self.aux_delete(node.right, swap_key)
 
 
+    def successor(self, node):
+        node = node.right
+        while node.left:
+            node = node.left
+        return node.val, node.count
 
     def search(self, key):
         # recursive
@@ -167,7 +170,7 @@ class BST:
             elif key < curr.val:
                 curr = curr.left
             else:
-                return True
+                return curr.count
         return False # if we reach a None
 
     def aux_search(self, node, key):
