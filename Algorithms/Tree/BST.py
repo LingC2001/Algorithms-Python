@@ -1,6 +1,6 @@
 """
-Binary Search Tree Complexity Analysis
-
+Binary Search Tree implementation
+Complexities are in each funciton documentation
 
 """
 
@@ -33,7 +33,6 @@ class BST:
         """
         if len(array) == 0:
             self.bst = None
-            self.size = 0
         else:
             array.sort()
             counts = []
@@ -51,7 +50,6 @@ class BST:
             counts.append((prev, count)) # adding last number
 
             self.bst = self.convert(counts, 0, len(counts))
-            self.size = len(array)
 
     def convert(self, array, start, end):
         """
@@ -120,7 +118,7 @@ class BST:
         Space complexity: O(N)
         """
 
-        self.aux_delete(self.bst, key)
+        self.bst = self.aux_delete(self.bst, key)
 
     
     def aux_delete(self, node, key):
@@ -132,24 +130,25 @@ class BST:
         elif key < node.val:
             node.left = self.aux_delete(node.left, key)
         else:
-            # one no children
+            # one or no children
             if node.left is None:
                 return node.right
             elif node.right is None:
                 return node.left
             else: # 2 children
                 swap_key, swap_count = self.successor(node)
-                node.key = swap_key
+                node.val = swap_key
                 node.count = swap_count
 
                 # delete successor
                 node.right = self.aux_delete(node.right, swap_key)
-
+        return node
 
     def successor(self, node):
         node = node.right
         while node.left:
             node = node.left
+        # print(f'successor: {node.val}, count: {node.count}')
         return node.val, node.count
 
     def search(self, key):
@@ -191,5 +190,17 @@ class BST:
         else: # current key == node.val
             return True
     
-    def __len__(self):
-        return self.size
+    def get_sorted_array(self):
+        traversal = []
+        self.inorder(self.bst, traversal)
+        return traversal
+    
+    def inorder(self, node, arr):
+        if node:
+            
+            self.inorder(node.left, arr)
+            
+            for _ in range(node.count):
+                arr.append(node.val)
+            
+            self.inorder(node.right, arr)
