@@ -1,3 +1,10 @@
+"""
+A Suffix Trie is a trie that contains all suffixes of a particular string.
+It is useful for pattern matching applications.
+This is because any substring of a string is simply a prefix of a suffix.
+Therefore creating a Trie (Prefix Trie) containing all suffixes allow us to search for
+any substrings in O(m) operations, where m = len(search_pattern)
+"""
 
 class SuffixTrie:
     def __init__(self, string):
