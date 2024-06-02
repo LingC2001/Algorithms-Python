@@ -17,7 +17,7 @@ class SuffixArray:
         
                 
         Space complexity: O(N)
-        
+
         """
         self.string = string
         n = len(string)
@@ -25,9 +25,12 @@ class SuffixArray:
         self.rank = [ord(string[i]) for i in self.suffix_arr]
         
         k =  1
-        while k <= (n+1)//2:
-            # 1. Sort using merge sort or radix sort?
-            self.suffix_arr = self.merge_sort(self.suffix_arr, k)
+        while k < n:
+            # # 1. Sort using merge sort
+            # self.suffix_arr = self.merge_sort(self.suffix_arr, k)
+
+            # 1. or using radix sort
+            self.suffix_arr = self.radix_sort(self.suffix_arr, k)
 
             # 2. Update rank array based on new sorted order
             temp = [0]*n
@@ -82,6 +85,67 @@ class SuffixArray:
                     merged.append(right[r])
                     r += 1
         return merged
+    
+    def radix_sort(self, nums, k):
+        """
+        Radix sort first sorting the second half of the string ranks, then the first half
+        """
+        n = len(nums)
+        # assinging second half rank to suffix id
+        rank_and_id = []
+        for i in range(n):
+            if nums[i] + k < n:
+                # shifting all the actual ranks by n+1 so that we can assign ranks based on length if second half is empty
+                rank_and_id.append((self.rank[nums[i] + k]+n+1, nums[i])) 
+            else: # if second half doesn't have enough letters
+                # assign rank as the length of suffix -1, n-num[i]
+                rank_and_id.append((n-nums[i], nums[i]))
+        # sorting second half
+        nums = self.counting_sort(rank_and_id)
+
+        # assinging first half rank to suffix id
+        rank_and_id = []
+        for i in range(n):
+            rank_and_id.append((self.rank[nums[i]], nums[i]))
+
+        # sorting first half
+        return self.counting_sort(rank_and_id)
+
+
+    def counting_sort(self, nums):
+        """
+        Counting sort for sorting "zipped" items based on the first index
+        Input:
+            nums: A list of tuples (key, item)
+        """
+        if len(nums) == 0:
+            return []
+        
+        max_rank = 0
+        # find the nums range
+        for rank, _ in nums:
+            max_rank = max(max_rank, rank)
+
+        counter = [0] * (max_rank + 1) #O(u) space
+
+        # count occurence of each number
+        for rank, _ in nums: # O(N) time
+            counter[rank] += 1
+        
+        # calculate starting indexs of each number - optimized space
+        prev = counter[0]
+        counter[0] = 0
+        for i in range(1, len(counter)): #O(u) time
+            temp = counter[i]
+            counter[i] = prev + counter[i-1]
+            prev = temp
+
+        # sort array
+        res = [0] * len(nums) # O(n) space
+        for rank, suffix_id in nums:
+            res[counter[rank]] = suffix_id
+            counter[rank] += 1
+        return res
     
     def print_suffixes(self):
         print("")
