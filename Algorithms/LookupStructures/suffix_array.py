@@ -39,12 +39,18 @@ class SuffixArray:
             self.rank = temp
 
             k *= 2
+        
+        # construct LCP array?
+        self.lcp = None
+        
 
 
     def compare(self, k, i, j):
         """
         Compares suffix at index i and suffix at index j, 
         returns True is suffix i < suffix j for the first 2*k characters
+
+        Time complexity: O(1)
         """
 
         n = len(self.rank)
