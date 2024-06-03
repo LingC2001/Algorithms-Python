@@ -5,6 +5,14 @@ def binary_search_interval(nums, target):
     Given a sorted array of numbers,
     Gets the range of the values equal to target in the form (start_inclusive, end_exclusive)
     If target does not exist in the nums array, then start and end index will be the same
+    
+    Time complexity: O(log(N))
+        We just do 2 binary searches, each has best and worst case of O(log(N))
+            - note even best case is O(log(N)) because we don't stop early when we
+            find target since we want to continue search for first/last occurrences.
+    
+    Auxiliary Space complexity: O(1)
+    
     """
     start_inclusive = binary_search_start(nums, target)
     end_exclusive = binary_search_end(nums, target)
