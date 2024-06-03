@@ -43,7 +43,96 @@ class SuffixArray:
         # construct LCP array?
         self.lcp = None
         
+    def find_pattern(self, pattern):
+        """
+        Finds all intervals in the string where the pattern appears.
+        Returns as a list of tuples in the form of:
+            [(start_1, end_1), (start_2, end_2), ...]
+        where string[start:end] == pattern
 
+        Time complexity: O(M*Log(N)) 
+            Does 2 binary searches, each binary search costing O(M*Log(N)) 
+        Auxiliary space complexity: O(1)
+        
+        """
+        start = self.binary_search_start(pattern)
+        end = self.binary_search_end(pattern)
+        output = []
+        for i in range(start, end):
+            output.append((self.suffix_arr[i], self.suffix_arr[i]+len(pattern)))
+        return output
+    
+    def binary_search_start(self, pattern):
+        """
+        Finds the first index (inclusive) in the suffix array where the prefix of the suffix == pattern
+        See: Other/binary_search_interval.py for more info
+        
+        Time complexity: O(M*Log(N))
+            Log(N) iterations, 
+            each iteration comparing M = len(pattern) number of characters O(M)
+        Auxiliary complexity: O(1)
+        """
+        l = 0
+        r = len(self.suffix_arr)-1
+
+        while l <= r:
+            mid = l + (r-l)//2 # avoid integer overflow when l and r are large positive integers
+            comparison = self.compare_prefix(pattern, mid)
+            if comparison == -1:
+                r = mid - 1
+            elif comparison == 1:
+                l = mid + 1
+            else: # if nums[mid] == target
+                r = mid - 1 # check left side
+        return l
+
+
+    def binary_search_end(self, pattern):
+        """
+        Finds the last index (exclusive) in the suffix array where the prefix of the suffix == pattern
+        See: Other/binary_search_interval.py for more info
+
+        Time/Space, same as binary_search_start()
+        """
+        l = 0
+        r = len(self.suffix_arr)-1
+
+        while l <= r:
+            mid = l + (r-l)//2 # avoid integer overflow when l and r are large positive integers
+            comparison = self.compare_prefix(pattern, mid)
+            if comparison == -1:
+                r = mid - 1
+            elif comparison == 1:
+                l = mid + 1
+            else: # if nums[mid] == target
+                l = mid + 1 # check right side
+        return l
+
+    def compare_prefix(self, pattern, mid):
+        """
+        If pattern < prefix of length m starting at mid:
+            returns -1
+        If pattern > prefix of length m starting at mid:
+            returns 1
+        If pattern == prefix of length m starting at mid:
+            returns 0
+
+        Time complexity: O(M)
+        Aux Space: O(1)
+        """
+        try:
+            for i in range(len(pattern)):
+                if pattern[i] < self.string[self.suffix_arr[mid]+i]:
+                    return -1
+                elif pattern[i] > self.string[self.suffix_arr[mid]+i]:
+                    return 1
+        except IndexError: 
+            # if index error, that means prefix ran out of strings to compare, len(pattern) > len(prefix)
+            # also since it didn't early return so far pattern == prefix
+            # therefore prefix must be lexicographically smaller
+            return 1
+        else:
+            return 0
 
     def compare(self, k, i, j):
         """

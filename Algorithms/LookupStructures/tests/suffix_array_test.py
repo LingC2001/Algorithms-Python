@@ -11,11 +11,63 @@ def check_sorted(sa):
             return False
     return True
 
+def assert_all_patterns_found(sa, pattern, output):
+    count = 0
+    for i in range(len(sa.string)-len(pattern)+1):
+        if sa.string[i:i+len(pattern)] == pattern:
+            count += 1
+    assert len(output) == count
+
+    for i in range(len(output)):
+        assert sa.string[output[i][0]:output[i][1]] == pattern
+
+
+def test_pattern_finding():
+    sa = SuffixArray("MISSISSIPPI")
+    pattern = "ISS"
+    output = sa.find_pattern(pattern)
+    assert_all_patterns_found(sa, pattern, output)
+
+    sa = SuffixArray("MISSISSIPPI")
+    pattern = "I"
+    output = sa.find_pattern(pattern)
+    assert_all_patterns_found(sa, pattern, output)
+
+    sa = SuffixArray("MISSISSIPPI")
+    pattern = "M"
+    output = sa.find_pattern(pattern)
+    assert_all_patterns_found(sa, pattern, output)
+
+    sa = SuffixArray("MISSISSIPPI")
+    pattern = "SSIS"
+    output = sa.find_pattern(pattern)
+    assert_all_patterns_found(sa, pattern, output)
+
+    sa = SuffixArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    pattern = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    output = sa.find_pattern(pattern)
+    assert_all_patterns_found(sa, pattern, output)
+
+    sa = SuffixArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    pattern = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    output = sa.find_pattern(pattern)
+    assert_all_patterns_found(sa, pattern, output)
+
+    sa = SuffixArray("jkasdhfoiweAJKSHDiawebiweIASDHIWQu")
+    pattern = "we"
+    output = sa.find_pattern(pattern)
+    assert_all_patterns_found(sa, pattern, output)
+
+    sa = SuffixArray("AAAAAAAAABBBBBBBBAAAAAAAAAAAAABBBBBBBBBBBAAAAAAAAAAAABBBBBBBBBBBBBBBAAAAAAAAAAAABBBBBBBBAAAAAAAAAAAAABBBBBBBBBBBAAAAAAAAAAAABBBBBBBBBBBBBBBAAAAAAAAAAAABBBBBBBBAAAAAAAAAAAAABBBBBBBBBBBAAAAAAAAAAAABBBBBBBBBBBBBBBAAAAAAAAAAAABBBBBBBBAAAAAAAAAAAAABBBBBBBBBBBAAAAAAAAAAAABBBBBBBBBBBBBBBAAAAAAAAAAAABBBBBBBBAAAAAAAAAAAAABBBBBBBBBBBAAAAAAAAAAAABBBBBBBBBBBBBBBAAAAAAAAAAAABBBBBBBBAAAAAAAAAAAAABBBBBBBBBBBAAAAAAAAAAAABBBBBBBBBBBBBBBAAAAAAAAAAAABBBBBBBBAAAAAAAAAAAAABBBBBBBBBBBAAAAAAAAAAAABBBBBBBBBBBBBBBAAA")
+    pattern = "AB"
+    output = sa.find_pattern(pattern)
+    assert_all_patterns_found(sa, pattern, output)
+
+
 def test_construction_time():
     
     start_t = time.time()
     sa = SuffixArray("MISSISSIPPI")
-    print(f'Time taken: {time.time()-start_t}')
     print(f'Time taken: {time.time()-start_t}')
     # sa.print_suffixes()
     for i in range(len(sa.suffix_arr)-1):
