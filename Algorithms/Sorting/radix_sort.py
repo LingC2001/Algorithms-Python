@@ -23,10 +23,11 @@ So, time: O(w/log(b) * (n+b))
 We want as large of a base as possible to minimize k and not slow down individual 
 counting sort. Therefore we choose b = n, so that counting sort is still O(n)
 Therefore time: O(w/log(n) * n), space: O(n)
-Hence, radix sort is still O(n) as long as w/log(n) = O(1), aka w <= log(n). 
+Hence, radix sort is still O(n) as long as w/log(n) = O(1), aka w = O(log(n)). 
 aka. when radix sort has integers of at most c*log(n) bits.
 
-
+This means the maximum size of the input can be 2^w = 2^(clog(n)) = n^c, which we 
+can see if better than counting sort where input could only be O(n)
 """
 
 

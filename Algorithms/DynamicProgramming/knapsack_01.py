@@ -32,4 +32,5 @@ def knapsack_01(values, weights, capacity):
                 max_values[i][c] = max(max_values[i-1][c], values[item_idx]+max_values[i-1][c-weights[item_idx]])
             else:
                 max_values[i][c] = max_values[i-1][c]
+    for row in max_values: print(row)
     return max_values[n][capacity]

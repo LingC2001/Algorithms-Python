@@ -55,6 +55,14 @@ def naive_partition(arr, lo, hi, pivot):
 def hoare_partition(arr, lo, hi, p):
     """
     swaps an element larger than pivot from the left with an element smaller than pivot from the right.
+        - increment i until an item that is strictly greater than pivot
+        - decrement j until an item that is smaller or equal to pivot
+        - swap.
+    
+    Note that this is inefficient for when there are many elements equal to pivot because 
+    all elements equal to pivot will be put on the left side of the pivot. 
+    Hence making our partitioning very unbalanced.
+    DNF paritioning solves this issue by considering for cases equal to pivot separately.
     """
     arr[lo], arr[p] = arr[p], arr[lo]
     i = lo
